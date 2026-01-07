@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let colorIndex = 0;
 
     // Initialize with 2 default options
-    addOption('藍方', 0); // Blue
-    addOption('紅方', 1); // Red
+    addOption('選項 1', 0); // Blue
+    addOption('選項 2', 1); // Red
 
     // Event Listeners
     addBtn.addEventListener('click', () => {
