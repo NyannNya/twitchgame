@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitch 忠誠點數賭博計算機</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔮 Twitch 賭博計算機</h1>
+            <p>快速計算期望值 (EV) 與凱利公式下注建議</p>
+        </header>
+
+        <div class="calculator-grid">
+            <div class="input-section">
+                <!-- Blue Team -->
+                <div class="team-input blue-team">
+                    <h2>🟦 藍方 (Blue)</h2>
+                    <div class="form-group">
+                        <label for="blue-rate">藍方勝率 (%)</label>
+                        <input type="number" id="blue-rate" placeholder="例如: 55" inputmode="decimal">
+                    </div>
+                    <div class="form-group">
+                        <label for="blue-pool">藍方總下注量</label>
+                        <input type="number" id="blue-pool" placeholder="0" inputmode="numeric">
+                    </div>
+                </div>
+
+                <!-- Red Team -->
+                <div class="team-input red-team">
+                    <h2>🟥 紅方 (Red)</h2>
+                    <div class="form-group">
+                        <label for="red-pool">紅方總下注量</label>
+                        <input type="number" id="red-pool" placeholder="0" inputmode="numeric">
+                    </div>
+                    <div class="info-group">
+                        <span>紅方勝率: <span id="red-rate-display">--</span>%</span>
+                    </div>
+                </div>
+
+                <!-- User Info -->
+                <div class="user-input">
+                    <div class="form-group">
+                        <label for="my-points">我的持有點數</label>
+                        <input type="number" id="my-points" placeholder="例如: 10000" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-section" id="result-section">
+                <div class="decision-card" id="decision-card">
+                    <h3>建議下注</h3>
+                    <div class="decision-main" id="decision-text">請輸入數據</div>
+                    <div class="decision-sub" id="decision-sub">等待輸入...</div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="label">預期獲利 (EV)</span>
+                        <span class="value" id="ev-value">--</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="label">賠率 (Odds)</span>
+                        <span class="value" id="odds-value">--</span>
+                    </div>
+                    <div class="stat-box highlight">
+                        <span class="label">建議下注金額</span>
+                        <span class="value" id="bet-amount">--</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="label">凱利比例</span>
+                        <span class="value" id="kelly-fraction">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

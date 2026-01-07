@@ -1,0 +1,230 @@
+:root {
+    --bg-color: #0e0e10;
+    --card-bg: #18181b;
+    --text-main: #efeff1;
+    --text-muted: #adadb8;
+    --twitch-purple: #9146ff;
+    --twitch-purple-hover: #772ce8;
+    --blue-team: #00d6d6; /* A nice bright cyan/blue for dark mode */
+    --red-team: #eb0400;
+    --success: #00c288;
+    --danger: #ff4f4d;
+    --warning: #f5a623;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid #2d2d31;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #ffffff 0%, #adadb8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.calculator-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+@media (max-width: 768px) {
+    .calculator-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Inputs */
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.team-input {
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #1f1f23;
+    border: 1px solid transparent;
+}
+
+.team-input h2 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+.blue-team {
+    border-left: 4px solid var(--blue-team);
+}
+
+.red-team {
+    border-left: 4px solid var(--red-team);
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    background-color: #0e0e10;
+    border: 1px solid #3a3a3d;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+}
+
+.form-group input:focus {
+    border-color: var(--twitch-purple);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(145, 70, 255, 0.2);
+}
+
+.info-group {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Results */
+.result-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.decision-card {
+    background-color: #26262c;
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+    border: 2px solid #2d2d31;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.decision-card h3 {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.decision-main {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.decision-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+/* Stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.stat-box {
+    background-color: #1f1f23;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.stat-box.highlight {
+    background-color: rgba(145, 70, 255, 0.1);
+    border: 1px solid rgba(145, 70, 255, 0.3);
+}
+
+.stat-box .label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.stat-box .value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Dynamic Decision Colors */
+.decision-card.bet-blue {
+    border-color: var(--blue-team);
+    background-color: rgba(0, 214, 214, 0.05);
+}
+.decision-card.bet-blue .decision-main {
+    color: var(--blue-team);
+}
+
+.decision-card.bet-red {
+    border-color: var(--red-team);
+    background-color: rgba(235, 4, 0, 0.05);
+}
+.decision-card.bet-red .decision-main {
+    color: var(--red-team);
+}
+
+.decision-card.skip {
+    border-color: var(--warning);
+}
+.decision-card.skip .decision-main {
+    color: var(--warning);
+}
