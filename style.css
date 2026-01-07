@@ -5,11 +5,23 @@
     --text-muted: #adadb8;
     --twitch-purple: #9146ff;
     --twitch-purple-hover: #772ce8;
-    --blue-team: #00d6d6; /* A nice bright cyan/blue for dark mode */
-    --red-team: #eb0400;
     --success: #00c288;
     --danger: #ff4f4d;
     --warning: #f5a623;
+
+    /* Option Colors Palette */
+    --opt-color-0: #00d6d6;
+    /* Cyan */
+    --opt-color-1: #eb0400;
+    /* Red */
+    --opt-color-2: #00fa9a;
+    /* SpringGreen */
+    --opt-color-3: #ff69b4;
+    /* HotPink */
+    --opt-color-4: #ffd700;
+    /* Gold */
+    --opt-color-5: #1e90ff;
+    /* DodgerBlue */
 }
 
 * {
@@ -31,11 +43,12 @@ body {
 
 .container {
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
+    /* Slightly wider for options */
     background-color: var(--card-bg);
     border-radius: 12px;
     padding: 24px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 1px solid #2d2d31;
 }
 
@@ -59,7 +72,8 @@ header p {
 
 .calculator-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr 0.8fr;
+    /* More space for inputs */
     gap: 24px;
 }
 
@@ -69,39 +83,147 @@ header p {
     }
 }
 
-/* Inputs */
+/* Inputs Section */
 .input-section {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.team-input {
-    padding: 16px;
-    border-radius: 8px;
+.options-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.options-header h2 {
+    font-size: 1.1rem;
+}
+
+.rate-status {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.rate-status.valid {
+    color: var(--success);
+}
+
+.rate-status.invalid {
+    color: var(--danger);
+}
+
+
+#options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Option Row */
+.option-row {
+    display: flex;
+    align-items: stretch;
     background-color: #1f1f23;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    padding-right: 40px;
+    /* Space for delete btn */
+    transition: all 0.2s;
     border: 1px solid transparent;
 }
 
-.team-input h2 {
-    font-size: 1.1rem;
-    margin-bottom: 12px;
+.option-row:focus-within {
+    border-color: #3a3a3d;
 }
 
-.blue-team {
-    border-left: 4px solid var(--blue-team);
+.option-color-stripe {
+    width: 6px;
+    background-color: #888;
 }
 
-.red-team {
-    border-left: 4px solid var(--red-team);
+.option-inputs {
+    flex-grow: 1;
+    display: flex;
+    padding: 10px;
+    gap: 10px;
 }
 
-.form-group {
-    margin-bottom: 12px;
+.input-group {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
-.form-group:last-child {
-    margin-bottom: 0;
+.input-group.small {
+    flex-grow: 0;
+    width: 80px;
+}
+
+.input-group label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    background-color: #0e0e10;
+    border: 1px solid #3a3a3d;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.input-group input:focus {
+    border-color: var(--twitch-purple);
+    outline: none;
+}
+
+/* Delete Button */
+.btn-delete {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 36px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-delete:hover {
+    color: var(--danger);
+    background-color: rgba(255, 79, 77, 0.1);
+}
+
+/* Buttons */
+.btn-secondary {
+    width: 100%;
+    padding: 10px;
+    background-color: #2d2d31;
+    color: var(--text-main);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: #3a3a3d;
+}
+
+.user-input-section {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #2d2d31;
 }
 
 .form-group label {
@@ -119,19 +241,6 @@ header p {
     border-radius: 4px;
     color: #fff;
     font-size: 1.1rem;
-    transition: all 0.2s;
-}
-
-.form-group input:focus {
-    border-color: var(--twitch-purple);
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(145, 70, 255, 0.2);
-}
-
-.info-group {
-    margin-top: 8px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
 }
 
 /* Results */
@@ -166,6 +275,8 @@ header p {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 8px;
+    word-break: break-all;
+    /* Prevent long names from breaking layout */
 }
 
 .decision-sub {
@@ -173,7 +284,6 @@ header p {
     color: var(--text-muted);
 }
 
-/* Stats */
 .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -205,26 +315,11 @@ header p {
     font-weight: 600;
 }
 
-/* Dynamic Decision Colors */
-.decision-card.bet-blue {
-    border-color: var(--blue-team);
-    background-color: rgba(0, 214, 214, 0.05);
-}
-.decision-card.bet-blue .decision-main {
-    color: var(--blue-team);
-}
-
-.decision-card.bet-red {
-    border-color: var(--red-team);
-    background-color: rgba(235, 4, 0, 0.05);
-}
-.decision-card.bet-red .decision-main {
-    color: var(--red-team);
-}
-
+/* Dynamic Decision Colors - populated by JS inline or specific classes */
 .decision-card.skip {
     border-color: var(--warning);
 }
+
 .decision-card.skip .decision-main {
     color: var(--warning);
 }

@@ -1,48 +1,37 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twitch 忠誠點數賭博計算機</title>
+    <title>Twitch 忠誠點數賭博計算機 (多選項)</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
         <header>
-            <h1>🔮 Twitch 賭博計算機</h1>
-            <p>快速計算期望值 (EV) 與凱利公式下注建議</p>
+            <h1>🔮 賭博計算機</h1>
+            <p>支援多選項 EV 與凱利公式計算</p>
         </header>
 
         <div class="calculator-grid">
             <div class="input-section">
-                <!-- Blue Team -->
-                <div class="team-input blue-team">
-                    <h2>🟦 藍方 (Blue)</h2>
-                    <div class="form-group">
-                        <label for="blue-rate">藍方勝率 (%)</label>
-                        <input type="number" id="blue-rate" placeholder="例如: 55" inputmode="decimal">
-                    </div>
-                    <div class="form-group">
-                        <label for="blue-pool">藍方總下注量</label>
-                        <input type="number" id="blue-pool" placeholder="0" inputmode="numeric">
-                    </div>
+
+                <div class="options-header">
+                    <h2>下注選項</h2>
+                    <span id="total-rate-display" class="rate-status">總勝率: 0%</span>
                 </div>
 
-                <!-- Red Team -->
-                <div class="team-input red-team">
-                    <h2>🟥 紅方 (Red)</h2>
-                    <div class="form-group">
-                        <label for="red-pool">紅方總下注量</label>
-                        <input type="number" id="red-pool" placeholder="0" inputmode="numeric">
-                    </div>
-                    <div class="info-group">
-                        <span>紅方勝率: <span id="red-rate-display">--</span>%</span>
-                    </div>
+                <div id="options-container">
+                    <!-- Options will be injected here by JS -->
                 </div>
+
+                <button id="add-option-btn" class="btn-secondary">+ 新增選項</button>
 
                 <!-- User Info -->
-                <div class="user-input">
+                <div class="user-input-section">
                     <div class="form-group">
                         <label for="my-points">我的持有點數</label>
                         <input type="number" id="my-points" placeholder="例如: 10000" inputmode="numeric">
@@ -50,7 +39,7 @@
                 </div>
             </div>
 
-            <div class="result-section" id="result-section">
+            <div class="result-section">
                 <div class="decision-card" id="decision-card">
                     <h3>建議下注</h3>
                     <div class="decision-main" id="decision-text">請輸入數據</div>
@@ -78,6 +67,30 @@
             </div>
         </div>
     </div>
+
+    <!-- Template for Option Row -->
+    <template id="option-template">
+        <div class="option-row">
+            <div class="option-color-stripe"></div>
+            <div class="option-inputs">
+                <div class="input-group">
+                    <label>選項名稱</label>
+                    <input type="text" class="opt-name" value="選項 1">
+                </div>
+                <div class="input-group small">
+                    <label>勝率 (%)</label>
+                    <input type="number" class="opt-rate" placeholder="50" inputmode="decimal">
+                </div>
+                <div class="input-group">
+                    <label>總下注量</label>
+                    <input type="number" class="opt-pool" placeholder="0" inputmode="numeric">
+                </div>
+            </div>
+            <button class="btn-delete" title="刪除此選項">×</button>
+        </div>
+    </template>
+
     <script src="script.js"></script>
 </body>
+
 </html>
